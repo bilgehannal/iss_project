@@ -30,5 +30,9 @@ const sendNotification = (username, imageName, imageId) => {
     });
 };
 
-module.exports.notification = sendNotification;
+router.get('/socket/trig', (req, res, next) => {
+    sendNotification(req.headers.username, req.headers.imageName, req.headers.imageId);
+    res.json({status: 1});
+});
+
 module.exports = router;

@@ -4,7 +4,16 @@ const QuickEncrypt = require('quick-encrypt');
 const Image = require('../models/Image');
 const User = require('../models/User');
 
-const sendNotification = require('./socket').notification;
+const sendNotification = (username, imageName, imageId, arrayOfClients) => {
+    const result = {
+        username: username,
+        imageName: imageName,
+        imageId: imageId
+    };
+    arrayOfClients.forEach(function(element) {
+        element.send(JSON.stringify(result));
+    });
+};
 
 router.post('/api/image', (req, res, next) => {
     if(req.files) {
@@ -27,7 +36,7 @@ router.post('/api/image', (req, res, next) => {
                     if(err) {
                         res.json({status: 0});
                     } else {
-                        sendNotification(req.body.username, data.imageName, data._id);
+                        sendNotification(req.body.username, data.imageName, data._id, require('./socket').arrayOfClients)
                         res.json({
                             status: 1,
                             extras: data
