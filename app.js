@@ -47,7 +47,7 @@ app.use('/', socketRouter);
 //...
 
 const md5File = require('md5-file/promise')
-app.post('helper/fileupload', function(req, res) {
+app.post('/helper/fileUpload', function(req, res) {
   if(req.files) {
     const file = req.files.image;
     // const filename = file.filename;
@@ -69,7 +69,7 @@ app.post('helper/fileupload', function(req, res) {
   }
 });
 
-app.post('helper/filedownload', function(req, res) {
+app.get('/helper/filedownload', function(req, res) {
   const name = req.headers.name;
   res.sendFile(__dirname + '/upload/'+name);
 });
@@ -77,7 +77,7 @@ app.post('helper/filedownload', function(req, res) {
 app.post('/helper/encryptFile', (req, res, next) => {
   const name = req.body.name;
   var key = req.body.key;
-  encryptor.encryptFile('./upload/'+name, './upload/'+name+'2.dat', key, function(err) {
+  encryptor.encryptFile('./upload/'+name, './upload/'+name+'1.dat', key, function(err) {
     if(err) {
       res.json({
         status:0
@@ -86,7 +86,7 @@ app.post('/helper/encryptFile', (req, res, next) => {
     res.json({
       status:1,
       extras: {
-        fileName: 'encrypted'+name+ '.dat',
+        fileName: name+ '1.dat',
       }
     });
   });
@@ -97,7 +97,7 @@ app.post('/helper/decryptFile', (req, res, next) => {
   var key = req.body.key;
   console.log('heyy')
   console.log(req.body)
-  encryptor.decryptFile('./upload/'+name, './upload/'+name+'1.png', key, function(err) {
+  encryptor.decryptFile('./upload/'+name, './upload/'+name+'2.png', key, function(err) {
     if(err) {
       res.json({
         status:0
@@ -106,7 +106,7 @@ app.post('/helper/decryptFile', (req, res, next) => {
     res.json({
       status:1,
       extras: {
-        fileName: 'decrypted'+name+ '.png',
+        fileName: name+ '2.png',
       }
     });
   });

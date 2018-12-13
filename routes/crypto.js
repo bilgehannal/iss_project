@@ -41,7 +41,8 @@ router.get('/helper/rsaGenerate', (req, res, next) => {
 });
 
 router.post('/helper/rsaEncrypt', (req, res, next) => {
-    let encryptedText = QuickEncrypt.encrypt( req.body.data, req.body.publicKey )
+    console.log(req.body.key)
+    let encryptedText = QuickEncrypt.encrypt( req.body.data, req.body.key )
     console.log(encryptedText) // This will print out the ENCRYPTED text, for example : " 01c066e00c660aabadfc320621d9c3ac25ccf2e4c29e8bf4c...... "
     res.json({
         status: 1,

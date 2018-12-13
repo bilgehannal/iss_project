@@ -11,12 +11,12 @@ const createCertificate = (username, publicKey) => {
 };
 
 const saveUserToDB = (username, publicKey) => {
-    console.log('ok');
+    console.log('User is added to tb');
 };
 
-router.post('api/register', (req, res, next) => {
+router.post('/api/register', (req, res, next) => {
     const username = req.body.username;
-    const publicKey = req.body.publicKey;
+    const publicKey = req.body.publickey;
     const certificate = createCertificate(username, publicKey);
     saveUserToDB(username, publicKey);
 
