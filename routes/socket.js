@@ -20,6 +20,7 @@ router.ws('/socket', (ws, req) => {
 });
 
 const sendNotification = (username, imageName, imageId) => {
+    console.log('trigged by ' + username)
     const result = {
         username: username,
         imageName: imageName,
@@ -31,6 +32,7 @@ const sendNotification = (username, imageName, imageId) => {
 };
 
 router.get('/socket/trig', (req, res, next) => {
+    console.log('hello')
     sendNotification(req.headers.username, req.headers.imageName, req.headers.imageId);
     res.json({status: 1});
 });

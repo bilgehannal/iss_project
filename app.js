@@ -16,6 +16,7 @@ const imageRouter = require('./routes/image');
 const socketRouter = require('./routes/socket');
 const upload = require('express-fileupload');
 
+const request = require('request');
 const crypto = require('crypto');
 var encryptor = require('file-encryptor');
 
@@ -111,6 +112,25 @@ app.post('/helper/decryptFile', (req, res, next) => {
     });
   });
 });
+
+const options = {
+  url: '/socket/trig',
+  headers: {
+    username: 'bilgehannal',
+    imageName: 'imageName',
+    imageId: 'image id'
+  }
+};
+
+function callback(error, response, body) {
+  if (!error && response.statusCode == 200) {
+    const info = JSON.parse(body);
+    console.log(info.stargazers_count + " Stars");
+    console.log(info.forks_count + " Forks");
+  }
+}
+request(options, callback);
+
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

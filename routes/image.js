@@ -3,17 +3,7 @@ const router = express.Router();
 const QuickEncrypt = require('quick-encrypt');
 const Image = require('../models/Image');
 const User = require('../models/User');
-
-const sendNotification = (username, imageName, imageId, arrayOfClients) => {
-    const result = {
-        username: username,
-        imageName: imageName,
-        imageId: imageId
-    };
-    arrayOfClients.forEach(function(element) {
-        element.send(JSON.stringify(result));
-    });
-};
+const request = require('request');
 
 router.post('/api/image', (req, res, next) => {
     if(req.files) {
@@ -36,7 +26,21 @@ router.post('/api/image', (req, res, next) => {
                     if(err) {
                         res.json({status: 0});
                     } else {
-                        sendNotification(req.body.username, data.imageName, data._id, require('./socket').arrayOfClients)
+                        const options = {
+                            url: 'http://localhost:3000/socket/trig',
+                            headers: {
+                              username: data.username,
+                              imageName: data.imageName,
+                              imageId: data._id
+                            }
+                          };
+                          
+                          function callback(error, response, body) {
+                            if (!error && response.statusCode == 200) {
+                              const info = JSON.parse(body);
+                            }
+                          }
+                          request(options, callback);
                         res.json({
                             status: 1,
                             extras: data
