@@ -70,7 +70,7 @@ app.post('/helper/fileUpload', function(req, res) {
 });
 
 app.get('/helper/filedownload', function(req, res) {
-  const name = req.headers.name;
+  const name = req.query.name;
   res.sendFile(__dirname + '/upload/'+name);
 });
 
