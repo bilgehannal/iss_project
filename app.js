@@ -69,8 +69,8 @@ app.post('/helper/fileUpload', function(req, res) {
   }
 });
 
-app.get('/helper/fileDownload', function(req, res) {
-  const name = req.query.name;
+app.post('/helper/fileDownload', function(req, res) {
+  const name = req.body.name;
   res.sendFile(__dirname + '/upload/'+name);
 });
 
