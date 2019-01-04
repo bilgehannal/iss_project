@@ -11,7 +11,7 @@ const url = require('url');
 router.get('/helper/keyPair', (req, res, next) => {
  
     // --- RSA Keypair Generation ---
-    let keys = QuickEncrypt.generate(1024) // Use either 2048 bits or 1024 bits.
+    let keys = QuickEncrypt.generate(2048) // Use either 2048 bits or 1024 bits.
     let publicKey = keys.public      // " -----BEGIN RSA PUBLIC KEY-----\nMIGJAoGBAIXlXZs+0FoIGBc5pjnZZxtvIzdDFtNi3SVi6vf2J...... "
     let privateKey = keys.private   // " -----BEGIN RSA PUBLIC KEY-----\nMIGJAoGBAIXlXZs+0FoIGBc5pjnZZxtvIzdDFtNi3SVi6vf2J...... "
 
