@@ -29,9 +29,9 @@ router.post('/api/image', (req, res, next) => {
                         const options = {
                             url: 'http://46.101.188.235:3001/socket/trig',
                             headers: {
-                              username: data.username,
-                              imageName: data.imageName,
-                              imageId: data._id
+                              username: 'testNameISS',
+                              imageName: 'test.jpg1.dat',
+                              imageId: '5c2f375cf84852797b6dea5b'
                             }
                           };
                           
