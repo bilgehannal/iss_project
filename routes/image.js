@@ -27,7 +27,7 @@ router.post('/api/image', (req, res, next) => {
                         res.json({status: 0});
                     } else {
                         const options = {
-                            url: 'http://localhost:3000/socket/trig',
+                            url: 'http://46.101.188.235:3001/socket/trig',
                             headers: {
                               username: data.username,
                               imageName: data.imageName,
